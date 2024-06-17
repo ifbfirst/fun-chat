@@ -1,0 +1,28 @@
+@media screen and (max-width: 520px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+  }
+  .header button {
+    display: inline-block;
+    margin: 5px;
+  }
+  .chat-wrapper {
+    flex-direction: column;
+  }
+  .left-section {
+    width: 100%;
+    align-items: center;
+  }
+  input[type='search'] {
+    width: 40%;
+  }
+  .messages-section {
+    width: 100%;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
