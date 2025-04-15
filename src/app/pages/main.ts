@@ -26,7 +26,13 @@ export class MainPage {
 
   createUserSection(chatWrapper: HTMLElement) {
     const leftSection = createTag('section', chatWrapper, '', 'left-section');
-    const search = createTagInput(leftSection, 'search', 'поиск...', 'search');
+    const search = createTagInput(
+      leftSection,
+      'search',
+      'поиск...',
+      'search',
+      'search',
+    );
     const users = createTag('section', leftSection, '', 'users-section');
 
     search.autocomplete = 'off';
