@@ -1,5 +1,4 @@
 const path = require('path');
-const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -12,7 +11,7 @@ const baseConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'webpack Boilerplate',
+      title: 'Fun Chat',
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
     }),
@@ -24,6 +23,10 @@ const baseConfig = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        type: 'asset/resource',
       },
       { test: /\.ts$/i, use: 'ts-loader' },
     ],
@@ -39,5 +42,9 @@ module.exports = ({ mode }) => {
     ? require('./webpack.prod.config')
     : require('./webpack.dev.config');
 
-  return merge(baseConfig, envConfig);
+  return {
+    ...baseConfig,
+    ...envConfig,
+    plugins: [...baseConfig.plugins, ...(envConfig.plugins || [])],
+  };
 };

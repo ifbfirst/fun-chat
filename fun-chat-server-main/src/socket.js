@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const Connection = require('./connection/connection');
 const Logger = require('./logger/logger');
 const ConnectionPool = require('./pool/connection-pool');
+const { serveFrontend } = require('../../serve-frontend');
 
 module.exports = class Socket {
   #socket = null;
@@ -21,7 +22,7 @@ module.exports = class Socket {
     if (!webSocketServerPort) {
       throw new Error('server port not correct or not available');
     }
-    this.#httpServer = http.createServer();
+    this.#httpServer = http.createServer(serveFrontend);
     this.#httpServer.listen(webSocketServerPort);
     this.#socket = new WebSocket.Server({ server: this.#httpServer });
     this.#socket.on('connection', this.#newConnectionHandler.bind(this));
