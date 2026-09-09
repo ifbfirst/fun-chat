@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fun-chat
+    runtime: node
+    buildCommand: npm install --include=dev && npm install --prefix fun-chat-server-main && npm run build
+    startCommand: node prod-server.js
+    envVars:
+      - key: LOG
+        value: ERROR
+      - key: STATIC_DIR
+        value: dist
